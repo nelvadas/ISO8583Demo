@@ -1,5 +1,7 @@
 package com.abyster.demo.ISO8583Demo;
 
+import org.jpos.iso.ISOPackager;
+import org.jpos.iso.packager.GenericPackager;
 import org.jpos.iso.packager.ISO87APackager;
 import org.jpos.iso.ISOException;
 import org.jpos.iso.ISOMsg;
@@ -44,7 +46,8 @@ static final Logger logger = Logger.getLogger(Iso8583DemoApplication.class.getNa
 
 			logger.info(String.format(" Field[11] %s", number));
 
-			ISO87APackager packager = new ISO87APackager();
+			ISOPackager packager = new GenericPackager("iso93ascii.xml");
+
 		byte[] isoMsgBytes = isoMsg.pack();
 			System.out.println(String.format(" Message %s", isoMsg.toString()));
 			System.out.println(String.format("Sending Message Bytes %s", isoMsgBytes));
