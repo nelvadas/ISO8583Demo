@@ -28,7 +28,7 @@ static final Logger logger = Logger.getLogger(Iso8583DemoApplication.class.getNa
 		Socket socket = null;
 		try {
 
-			System.out.println(String.format("Connecting to server: %s:%s", serverIp,serverPort));
+			logger.info(String.format("Connecting to server: %s:%s", serverIp,serverPort));
 			socket = new Socket(serverIp, serverPort);
 
 
@@ -46,8 +46,9 @@ static final Logger logger = Logger.getLogger(Iso8583DemoApplication.class.getNa
 
 			logger.info(String.format(" Field[11] %s", number));
 
-			ISOPackager packager = new GenericPackager("iso8583packager.xml");
-
+			//ISOPackager packager = new GenericPackager("iso8583packager.xml");
+			ISO87APackager packager = new ISO87APackager();
+			isoMsg.setPackager(packager);
 		byte[] isoMsgBytes = isoMsg.pack();
 			System.out.println(String.format(" Message %s", isoMsg.toString()));
 			System.out.println(String.format("Sending Message Bytes %s", isoMsgBytes));
