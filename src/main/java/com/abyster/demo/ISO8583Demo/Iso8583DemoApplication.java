@@ -46,7 +46,7 @@ static final Logger logger = Logger.getLogger(Iso8583DemoApplication.class.getNa
 
 			logger.info(String.format(" Field[11] %s", number));
 
-			ISOPackager packager = new GenericPackager("iso93ascii.xml");
+			ISOPackager packager = new GenericPackager("iso8583packager.xml");
 
 		byte[] isoMsgBytes = isoMsg.pack();
 			System.out.println(String.format(" Message %s", isoMsg.toString()));
