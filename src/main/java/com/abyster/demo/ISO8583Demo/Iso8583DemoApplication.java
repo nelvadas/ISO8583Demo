@@ -39,17 +39,19 @@ static final Logger logger = Logger.getLogger(Iso8583DemoApplication.class.getNa
 		OutputStream outputStream = socket.getOutputStream();
 			Random rnd = new Random();
 			int number = rnd.nextInt(999999);
-		ISOMsg isoMsg = new ISOMsg();
-		isoMsg.setMTI("1804");
-		isoMsg.set(11, number+"");
-		isoMsg.set(12, "230210154149");
-		isoMsg.set(24, "831");
+
+
 
 			logger.info(String.format(" Field[11] %s", number));
 
-			//ISOPackager packager = new GenericPackager("iso8583packager.xml");
-			ISOPackager packager = new GenericValidatingPackager();
+			ISOPackager packager = new GenericPackager("iso8583packager.xml");
+			ISOMsg isoMsg = new ISOMsg();
 			isoMsg.setPackager(packager);
+			isoMsg.setMTI("1804");
+			isoMsg.set(11, number+"");
+			isoMsg.set(12, "230210154149");
+			isoMsg.set(24, "831");
+
 		byte[] isoMsgBytes = isoMsg.pack();
 			System.out.println(String.format(" Message %s", isoMsg.toString()));
 			System.out.println(String.format("Sending Message Bytes %s", isoMsgBytes));
